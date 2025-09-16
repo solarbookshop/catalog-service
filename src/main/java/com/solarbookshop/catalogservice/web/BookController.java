@@ -1,13 +1,10 @@
 package com.solarbookshop.catalogservice.web;
 
 import com.solarbookshop.catalogservice.domain.Book;
-import com.solarbookshop.catalogservice.domain.BookAlreadyExistsException;
-import com.solarbookshop.catalogservice.domain.BookNotFoundException;
 import com.solarbookshop.catalogservice.domain.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,17 +48,5 @@ public class BookController {
   @PutMapping("{isbn}")
   public Book put(@PathVariable String isbn, @Valid @RequestBody Book book) {
     return bookService.editBookDetails(isbn, book);
-  }
-
-  @ExceptionHandler(BookNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  public String handleBookNotFound(BookNotFoundException ex) {
-      return ex.getMessage();
-  }
-
-  @ExceptionHandler(BookAlreadyExistsException.class)
-  @ResponseStatus(HttpStatus.CONFLICT)
-  public String handleBookAlreadyExists(BookAlreadyExistsException ex) {
-      return ex.getMessage();
   }
 }
