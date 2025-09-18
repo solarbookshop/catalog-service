@@ -6,18 +6,18 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 public record Book(
-        @NotBlank(message = "{isbn.notBlank}")
-				@Pattern(regexp = "^([0-9]{10}|[0-9]{13})$", message = "{isbn.invalid}")
-				String isbn,
+        @NotBlank(message = "The book ISBN must be defined.")
+        @Pattern(regexp = "^([0-9]{10}|[0-9]{13})$", message = "The ISBN format must be valid.")
+        String isbn,
 
-				@NotBlank(message = "{title.notBlank}")
-				String title,
+        @NotBlank(message = "The book title must be defined.")
+        String title,
 
-				@NotBlank(message = "{author.notBlank}")
-				String author,
+        @NotBlank(message = "The book author must be defined.")
+        String author,
 
-				@NotNull(message = "{price.notNull}")
-				@Positive(message = "{price.positive}")
-				Double price
+        @NotNull(message = "The book price must be defined.")
+        @Positive(message = "The book price must be greater than zero.")
+        Double price
 ) {
 }
