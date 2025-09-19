@@ -1,0 +1,37 @@
+name: Commit Stage
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+      - name: Setup JDK
+        uses: actions/setup-java@v5.0.0
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+          cache: 'gradle'
+      - name: Build and Test
+        run: ./gradlew build --no-daemon
+      - name: Anchore Vulnerability Scan
+        uses: anchore/scan-action@v7.0.0
+        id: scan
+        with:
+          path: "${{ github.workspace }}"
+          fail-build: false
+          severity-cutoff: high
+          output-format: sarif
+      - name: Upload vulnerability report
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
