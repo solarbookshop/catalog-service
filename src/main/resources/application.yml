@@ -9,3 +9,5 @@ server:
     threads:
       max: 50
       min-spare: 5
+solar:
+  greeting: Welcome to the local book catalog 👋
