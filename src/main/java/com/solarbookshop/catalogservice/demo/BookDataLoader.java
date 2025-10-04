@@ -18,8 +18,8 @@ public class BookDataLoader {
 
   @EventListener(ApplicationReadyEvent.class)
   public void loadBookTestData() {
-    bookRepository.save(new Book("0134685997", "Effective Java", "Joshua Bloch", 45.0));
-    bookRepository.save(new Book("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5));
-    bookRepository.save(new Book("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99));
+    bookRepository.save(Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0));
+    bookRepository.save(Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5));
+    bookRepository.save(Book.of("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99));
   }
 }

@@ -1,8 +1,10 @@
 # Catalog Service
+
 This application is part of the Solar Bookshop system and provides the functionality for managing
 the books in the bookshop catalog.
 
 ## REST API
+
 | Endpoint      | HTTP method | Request body | Status | Response body | Description                               |
 |---------------|-------------|--------------|--------|---------------|-------------------------------------------|
 | /books        | GET         |              | 200    | Book[]        | Get all the books in the catalog.         |
@@ -13,3 +15,14 @@ the books in the bookshop catalog.
 | /books/{isbn} | PUT         | Book         | 200    | Book          | Update the book with the given ISBN.      |
 |               |             |              | 201    | Book          | Create a book with the given ISBN.        |
 | /books/{isbn} | DELETE      |              | 204    |               | Delete the book with the given ISBN.      |
+
+## Postgres Database
+
+```bash
+docker run -d --name solar-postgres \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=secret \
+  -e POSTGRES_DB=solardb_catalog \
+  -p 5433:5432 \
+  postgres:17.3
+```
