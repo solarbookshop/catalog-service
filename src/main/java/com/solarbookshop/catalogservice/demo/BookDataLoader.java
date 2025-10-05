@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Profile("testdata")
 public class BookDataLoader {
@@ -18,8 +20,10 @@ public class BookDataLoader {
 
   @EventListener(ApplicationReadyEvent.class)
   public void loadBookTestData() {
-    bookRepository.save(Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0));
-    bookRepository.save(Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5));
-    bookRepository.save(Book.of("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99));
+    bookRepository.deleteAll();
+    var effectiveJava = Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0);
+    var headFirstJava = Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5);
+    var kotlinInAction = Book.of("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99);
+    bookRepository.saveAll(List.of(effectiveJava, headFirstJava, kotlinInAction));
   }
 }

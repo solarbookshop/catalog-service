@@ -15,7 +15,7 @@ public class BookService {
   }
 
   public Book viewBookDetails(String isbn) {
-    return bookRepository.findBookByIsbn(isbn)
+    return bookRepository.findByIsbn(isbn)
             .orElseThrow(() -> new BookNotFoundException(isbn));
   }
 
@@ -31,7 +31,7 @@ public class BookService {
   }
 
   public Book editBookDetails(String isbn, Book book) {
-    return bookRepository.findBookByIsbn(isbn)
+    return bookRepository.findByIsbn(isbn)
             .map(existingBook -> {
               var bookToUpdate = new Book(
                       existingBook.id(),
