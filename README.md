@@ -18,11 +18,31 @@ the books in the bookshop catalog.
 
 ## Postgres Database
 
+### start postgresql
+
 ```bash
-docker run -d --name solar-postgres \
+docker run -d --rm --name solar-postgres \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=secret \
   -e POSTGRES_DB=solardb_catalog \
   -p 5433:5432 \
-  postgres:17.3
+  postgres:18
+```
+
+### stop postgresql
+
+```bash
+docker stop solar-postgres
+```
+
+### access postgresql container
+
+```bash
+docker exec -it solar-postgres psql -U user -d solardb_catalog
+```
+
+### access postgresql from host
+
+```bash
+PGPASSWORD=secret psql -h localhost -p 5433 -U user -d solardb_catalog
 ```
