@@ -30,8 +30,8 @@ class BookRepositoryJdbcTests {
 
   @Test
   void find_all_books() {
-    var effectiveJava = Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0);
-    var headFirstJava = Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5);
+    var effectiveJava = Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0, "Solar Books");
+    var headFirstJava = Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5, "Solar Books");
     jdbcAggregateTemplate.saveAll(List.of(effectiveJava, headFirstJava));
 
     var actualBooks = bookRepository.findAll();
@@ -45,7 +45,7 @@ class BookRepositoryJdbcTests {
   @Test
   void find_book_by_isbn_when_existing() {
     var isbn = "0134685997";
-    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0);
+    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0, "Solar Books");
     jdbcAggregateTemplate.save(effectiveJava);
 
     var actualBook = bookRepository.findByIsbn(isbn);
@@ -57,7 +57,7 @@ class BookRepositoryJdbcTests {
   @Test
   void exists_by_isbn_when_existing() {
     var isbn = "0134685997";
-    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0);
+    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0, "Solar Books");
     jdbcAggregateTemplate.save(effectiveJava);
 
     var exists = bookRepository.existsByIsbn(isbn);
@@ -75,7 +75,7 @@ class BookRepositoryJdbcTests {
   @Test
   void delete_by_isbn() {
     var isbn = "0134685997";
-    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0);
+    var effectiveJava = Book.of(isbn, "Effective Java", "Joshua Bloch", 45.0, "Solar Books");
     var savedBook = jdbcAggregateTemplate.save(effectiveJava);
 
     bookRepository.deleteByIsbn(isbn);

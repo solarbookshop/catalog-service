@@ -20,7 +20,7 @@ class CatalogServiceApplicationTests {
 
   @Test
   void when_post_request_then_book_created() {
-    var expectedBook = Book.of("1234567890", "Expected Java", "Joshua Bloch", 45.00);
+    var expectedBook = Book.of("1234567890", "Expected Java", "Joshua Bloch", 45.00, "Solar Books");
     webTestClient.post()
             .uri("/books")
             .bodyValue(expectedBook)
@@ -36,7 +36,7 @@ class CatalogServiceApplicationTests {
   @Test
   void whenPutRequestThenBookUpdated() {
     var bookIsbn = "1231231232";
-    var bookToCreate = Book.of(bookIsbn, "Title", "Author", 9.90);
+    var bookToCreate = Book.of(bookIsbn, "Title", "Author", 9.90, "Solar Books");
     Book createdBook = webTestClient
             .post()
             .uri("/books")
@@ -46,7 +46,7 @@ class CatalogServiceApplicationTests {
             .expectBody(Book.class).value(book -> assertThat(book).isNotNull())
             .returnResult().getResponseBody();
     var bookToUpdate = new Book(createdBook.id(), createdBook.isbn(), createdBook.title(), createdBook.author(), 7.95,
-            createdBook.createdDate(), createdBook.lastModifiedDate(), createdBook.version());
+            "Solar Books", createdBook.createdDate(), createdBook.lastModifiedDate(), createdBook.version());
 
     webTestClient
             .put()
@@ -63,7 +63,7 @@ class CatalogServiceApplicationTests {
   @Test
   void whenDeleteRequestThenBookDeleted() {
     var bookIsbn = "1231231233";
-    var bookToCreate = Book.of(bookIsbn, "Title", "Author", 9.90);
+    var bookToCreate = Book.of(bookIsbn, "Title", "Author", 9.90, "Solar Books");
     webTestClient
             .post()
             .uri("/books")

@@ -22,14 +22,14 @@ class BookValidationTests {
 
   @Test
   void when_fields_correct_then_validation_succeeds() {
-    var book = Book.of("1234567890", "The Hobbit", "J. R. R.", 10.99);
+    var book = Book.of("1234567890", "The Hobbit", "J. R. R.", 10.99, "Solar Books");
     var violations = validator.validate(book);
     assertThat(violations).isEmpty();
   }
 
   @Test
   void when_isbn_incorrect_then_validation_fails() {
-    var book = Book.of("invalid-isbn", "The Hobbit", "J. R. R.", 10.99);
+    var book = Book.of("invalid-isbn", "The Hobbit", "J. R. R.", 10.99, "Solar Books");
     var violations = validator.validate(book);
     assertThat(violations).hasSize(1);
     assertThat(violations.iterator().next().getMessage()).isEqualTo("The ISBN format must be valid.");

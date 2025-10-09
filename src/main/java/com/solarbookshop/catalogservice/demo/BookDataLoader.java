@@ -21,9 +21,9 @@ public class BookDataLoader {
   @EventListener(ApplicationReadyEvent.class)
   public void loadBookTestData() {
     bookRepository.deleteAll();
-    var effectiveJava = Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0);
-    var headFirstJava = Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5);
-    var kotlinInAction = Book.of("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99);
+    var effectiveJava = Book.of("0134685997", "Effective Java", "Joshua Bloch", 45.0, "Solar Books");
+    var headFirstJava = Book.of("0596009208", "Head First Java", "Kathy Sierra, Bert Bates", 37.5, "Solar Books");
+    var kotlinInAction = Book.of("9781492078005", "Kotlin in Action", "Dmitry Jemerov, Svetlana Isakova", 49.99, "Solar Books");
     bookRepository.saveAll(List.of(effectiveJava, headFirstJava, kotlinInAction));
   }
 }
