@@ -59,6 +59,13 @@ tasks.bootBuildImage {
 
     docker {
         publishRegistry {
+            val publishRequested =
+                (project.findProperty("publishImage"))?.toString()?.toBoolean() ?: false
+
+            if (!publishRequested) {
+                return@publishRegistry
+            }
+
             val registryUrl = (project.findProperty("registryUrl") ?: System.getenv("REGISTRY_URL")) as String?
             val user = (project.findProperty("registryUsername") ?: System.getenv("REGISTRY_USERNAME")) as String?
             val token = (project.findProperty("registryToken") ?: System.getenv("REGISTRY_TOKEN")) as String?
