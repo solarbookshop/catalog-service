@@ -52,3 +52,24 @@ tasks.withType<Test> {
 tasks.bootRun {
     systemProperty("spring.profiles.active", "testdata")
 }
+
+tasks.bootBuildImage {
+    imageName.set(project.name)
+    environment.set(mapOf("BP_JVM_VERSION" to "25.*"))
+
+    docker {
+        publishRegistry {
+            val registryUrl = (project.findProperty("registryUrl") ?: System.getenv("REGISTRY_URL")) as String?
+            val user = (project.findProperty("registryUsername") ?: System.getenv("REGISTRY_USERNAME")) as String?
+            val token = (project.findProperty("registryToken") ?: System.getenv("REGISTRY_TOKEN")) as String?
+
+            if (user.isNullOrBlank() || token.isNullOrBlank()) {
+                throw GradleException("Registry credentials missing. Set registryUsername/registryToken or REGISTRY_USERNAME/REGISTRY_TOKEN.")
+            }
+
+            url.set(registryUrl)
+            username.set(user)
+            password.set(token)
+        }
+    }
+}
