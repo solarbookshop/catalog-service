@@ -59,8 +59,7 @@ tasks.bootBuildImage {
 
     docker {
         publishRegistry {
-            val publishRequested =
-                (project.findProperty("publishImage"))?.toString()?.toBoolean() ?: false
+            val publishRequested = (project.findProperty("publishImage"))?.toString()?.toBoolean() ?: false
 
             if (!publishRequested) {
                 return@publishRegistry
