@@ -28,5 +28,7 @@ spec:
               value: "10"
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://solar-postgres/solardb_catalog
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-service
             - name: SPRING_PROFILES_ACTIVE
               value: testdata
