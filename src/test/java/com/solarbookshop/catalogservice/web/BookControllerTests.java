@@ -5,10 +5,9 @@ import com.solarbookshop.catalogservice.domain.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.BDDMockito.given;
@@ -18,14 +17,14 @@ class BookControllerTests {
   @Autowired
   WebApplicationContext webApplicationContext;
 
-  WebTestClient webTestClient;
+  RestTestClient client;
 
   @MockitoBean
   BookService bookService;
 
   @BeforeEach
   void setUp() {
-    webTestClient = MockMvcWebTestClient.bindToApplicationContext(webApplicationContext).build();
+    client = RestTestClient.bindToApplicationContext(webApplicationContext).build();
   }
 
   @Test
@@ -33,7 +32,7 @@ class BookControllerTests {
     var isbn = "123456789";
     given(bookService.viewBookDetails(isbn)).willThrow(BookNotFoundException.class);
 
-    webTestClient.get()
+    client.get()
             .uri("/books/" + isbn)
             .exchange()
             .expectStatus().isNotFound();

@@ -6,9 +6,8 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,19 +18,19 @@ public class HomeControllerTests {
   @Autowired
   WebApplicationContext webApplicationContext;
 
-  WebTestClient webTestClient;
+  RestTestClient client;
 
   @Autowired
   SolarProperties solarProperties;
 
   @BeforeEach
-  void beforeAll() {
-    webTestClient = MockMvcWebTestClient.bindToApplicationContext(webApplicationContext).build();
+  void setup() {
+    client = RestTestClient.bindToApplicationContext(webApplicationContext).build();
   }
 
   @Test
   void when_root_url_then_display_welcome_message() {
-    webTestClient.get()
+    client.get()
             .uri("/")
             .exchange()
             .expectStatus().isOk()
