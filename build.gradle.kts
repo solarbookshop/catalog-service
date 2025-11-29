@@ -59,8 +59,9 @@ tasks.bootRun {
 }
 
 tasks.bootBuildImage {
+    builder.set("paketobuildpacks/builder-noble-java-tiny:latest")
     imageName.set(project.name)
-    environment.set(mapOf("BP_JVM_VERSION" to "25.*"))
+    environment.set(mapOf("BP_JVM_VERSION" to "25"))
 
     docker {
         publishRegistry {
