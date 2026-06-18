@@ -1,0 +1,14 @@
+### GET all books
+GET http://localhost:9001/books
+
+### POST a new book
+POST http://localhost:9001/books
+Content-Type: application/json
+
+{
+  "isbn": "1234567897",
+  "title": "All I don't know about the Arctic",
+  "author": "Jon Snow",
+  "price": 9.90,
+  "publisher": "Manning"
+}
