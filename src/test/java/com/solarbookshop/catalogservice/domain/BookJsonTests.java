@@ -41,7 +41,7 @@ class BookJsonTests {
               "publisher":"Solar Books",
               "createdDate":null,
               "lastModifiedDate":null,
-              "version":0
+              "version":null
             }
             """;
     var expectedBook = Book.of("1234567890", "The Hobbit", "", 10.99, "Solar Books");
