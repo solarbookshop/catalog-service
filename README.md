@@ -16,6 +16,13 @@ the books in the bookshop catalog.
 |               |             |              | 201    | Book          | Create a book with the given ISBN.        |
 | /books/{isbn} | DELETE      |              | 204    |               | Delete the book with the given ISBN.      |
 
+## Security Policies
+
+- GET requests to fetch books should be allowed without authentication.
+- All other requests should require authentication.
+- The application should be configured as an OAuth2 Resource Server and use JWT authentication.
+- The flow for handling JWT authentication should be stateless.
+
 ## Useful Commands
 
 | Gradle Command             | Description                                   |
