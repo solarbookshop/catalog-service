@@ -42,6 +42,8 @@ class BookJsonTests {
           "publisher":"Solar Books",
           "createdDate":null,
           "lastModifiedDate":null,
+          "createdBy":null,
+          "lastModifiedBy":null,
           "version":null
         }
         """;
@@ -54,11 +56,13 @@ class BookJsonTests {
 
   @Test
   void test_serialize_with_audit_fields() throws IOException {
-    var created = Instant.parse("2020-01-01T00:00:00Z");
-    var modified = Instant.parse("2020-01-02T01:02:03Z");
+    var createdDate = Instant.parse("2020-01-01T00:00:00Z");
+    var lastModifiedDate = Instant.parse("2020-01-02T01:02:03Z");
+    var createdBy = "Ram";
+    var lastModifiedBy = "Shayam";
 
     var book = new Book(42L, "1234567890123", "Clean Code", "Robert C. Martin", 33.50,
-        "Solar Books", created, modified, 5);
+        "Solar Books", createdDate, lastModifiedDate, createdBy, lastModifiedBy, 5);
     var jsonContent = json.write(book);
 
     // id and version should be present as numbers
@@ -66,8 +70,8 @@ class BookJsonTests {
     assertThat(jsonContent).extractingJsonPathNumberValue("@.version").isEqualTo(book.version());
 
     // createdDate and lastModifiedDate should be serialized as ISO-8601 strings
-    assertThat(jsonContent).extractingJsonPathStringValue("@.createdDate").isEqualTo(created.toString());
-    assertThat(jsonContent).extractingJsonPathStringValue("@.lastModifiedDate").isEqualTo(modified.toString());
+    assertThat(jsonContent).extractingJsonPathStringValue("@.createdDate").isEqualTo(createdDate.toString());
+    assertThat(jsonContent).extractingJsonPathStringValue("@.lastModifiedDate").isEqualTo(lastModifiedDate.toString());
   }
 
   @Test
@@ -82,12 +86,23 @@ class BookJsonTests {
           "publisher":"Solar Books",
           "createdDate":"2000-01-01T12:00:00Z",
           "lastModifiedDate":"2000-01-02T13:14:15Z",
+          "createdBy":"Ram",
+          "lastModifiedBy":"Shayam",
           "version":2
         }
         """;
 
-    var expected = new Book(1L, "1234567890123", "The Pragmatic Programmer", "Andy Hunt", 42.0,
-        "Solar Books", Instant.parse("2000-01-01T12:00:00Z"), Instant.parse("2000-01-02T13:14:15Z"), 2);
+    var expected = new Book(1L,
+        "1234567890123",
+        "The Pragmatic Programmer",
+        "Andy Hunt",
+        42.0,
+        "Solar Books",
+        Instant.parse("2000-01-01T12:00:00Z"),
+        Instant.parse("2000-01-02T13:14:15Z"),
+        "Ram",
+        "Shayam",
+        2);
 
     assertThat(json.parse(jsonContent))
         .usingRecursiveComparison()

@@ -4,8 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
@@ -37,10 +39,16 @@ public record Book(
     @LastModifiedDate
     Instant lastModifiedDate,
 
+    @CreatedBy
+    String createdBy,
+
+    @LastModifiedBy
+    String lastModifiedBy,
+
     @Version
     Integer version
 ) {
   public static Book of(String isbn, String title, String author, Double price, String publisher) {
-    return new Book(null, isbn, title, author, price, publisher, null, null, null);
+    return new Book(null, isbn, title, author, price, publisher, null, null, null, null, null);
   }
 }

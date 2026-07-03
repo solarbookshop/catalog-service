@@ -98,8 +98,9 @@ class CatalogServiceApplicationTests {
         .expectBody(Book.class).value(book -> assertThat(book).isNotNull())
         .returnResult().getResponseBody();
     assert createdBook != null;
-    var bookToUpdate = new Book(createdBook.id(), createdBook.isbn(), createdBook.title(), createdBook.author(), 7.95,
-        "Solar Books", createdBook.createdDate(), createdBook.lastModifiedDate(), createdBook.version());
+    var bookToUpdate = new Book(createdBook.id(), createdBook.isbn(), createdBook.title(),
+        createdBook.author(), 7.95, "Solar Books", createdBook.createdDate(), createdBook.lastModifiedDate(),
+        createdBook.createdBy(), createdBook.lastModifiedBy(), createdBook.version());
 
     testClient.put().uri("/books/" + bookIsbn)
         .header(HttpHeaders.AUTHORIZATION, "Bearer " + shayamTokens.accessToken())
