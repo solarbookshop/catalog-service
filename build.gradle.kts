@@ -37,6 +37,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-config")
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   runtimeOnly("org.postgresql:postgresql")
+  runtimeOnly("io.micrometer:micrometer-registry-prometheus")
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
   testImplementation("org.springframework.boot:spring-boot-starter-data-jdbc-test")

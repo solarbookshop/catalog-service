@@ -12,3 +12,9 @@ Content-Type: application/json
   "price": 9.90,
   "publisher": "Manning"
 }
+
+### GET metrics in OpenMetrics format
+GET http://localhost:9001/actuator/prometheus
+Accept: application/openmetrics-text
+Version: 1.0.0
+Accept-Charset: utf-8
