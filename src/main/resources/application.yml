@@ -7,6 +7,7 @@ server:
     threads:
       max: 50
       min-spare: 5
+
 spring:
   application:
     name: catalog-service
@@ -37,6 +38,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/SolarBookshop
+
 management:
   endpoints:
     web:
@@ -51,5 +53,11 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+
+logging:
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+  include-application-name: false
+
 solar:
   greeting: Welcome to the local book catalog 👋
