@@ -66,7 +66,7 @@ management:
 
 logging:
   pattern:
-    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+    correlation: "[${spring.application.name:},%X{trace_id:-},%X{span_id:-}] "
   include-application-name: false
 
 solar:
