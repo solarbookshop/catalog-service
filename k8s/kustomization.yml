@@ -1,0 +1,11 @@
+resources:
+  - deployment.yml
+  - service.yml
+
+configMapGenerator:
+  - name: catalog-config
+    files:
+      - application.yml
+    options:
+      labels:
+        app: catalog-service
