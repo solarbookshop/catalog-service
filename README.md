@@ -1,7 +1,7 @@
 # Catalog Service
 
-This application is part of the Solar Bookshop system and provides the functionality for managing
-the books in the bookshop catalog.
+This application is part of the Solar Bookshop system and provides the functionality for managing the books in the
+bookshop catalog.
 
 ## REST API
 
@@ -49,7 +49,7 @@ docker container run -d --rm --name solar-postgres \
   -e POSTGRES_PASSWORD=secret \
   -e POSTGRES_DB=solardb_catalog \
   -p 5433:5432 \
-  postgres:18
+  postgres:18-alpine
 ```
 
 ### Container Commands
@@ -74,7 +74,7 @@ Access PostgreSQL from the host machine:
 PGPASSWORD=secret psql -h localhost -p 5433 -U user -d solardb_catalog
 ```
 
-| PSQL Command	              | Description                                    |
+| PSQL Command	               | Description                                    |
 |:---------------------------|:-----------------------------------------------|
 | `\list`                    | List all databases.                            |
 | `\connect solardb_catalog` | Connect to specific database.                  |
