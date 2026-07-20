@@ -7,10 +7,11 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: solarbookshop/catalog-service
   VERSION: ${{ github.sha }}
+
 jobs:
   build:
     name: Build and Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       security-events: write
@@ -53,7 +54,7 @@ jobs:
     name: Package and Publish
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       packages: write
