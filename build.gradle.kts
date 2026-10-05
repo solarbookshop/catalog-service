@@ -67,7 +67,7 @@ tasks.bootRun {
 }
 
 tasks.bootBuildImage {
-  builder.set("paketobuildpacks/builder-noble-java-tiny:latest")
+  builder.set("paketobuildpacks/ubuntu-resolute-builder:latest")
   imageName.set(project.name)
   environment.set(mapOf("BP_JVM_VERSION" to "25"))
 
