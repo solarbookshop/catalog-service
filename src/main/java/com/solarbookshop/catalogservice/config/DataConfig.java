@@ -13,6 +13,17 @@ import java.util.Optional;
 @Configuration
 @EnableJdbcAuditing
 public class DataConfig {
+  /// Configures an [AuditorAware] bean to extract the current authenticated user's identity.
+  ///
+  /// When an `AuditorAware` bean is defined and auditing is enabled via [@EnableJdbcAuditing],
+  /// Spring Data uses it to extract the current principal. In our case, the username of the
+  /// currently authenticated user is represented as a `String`.
+  ///
+  /// This enables Spring Data to automatically populate entity fields annotated with
+  /// `@CreatedBy` and `@LastModifiedBy` (`Book` record) whenever a create
+  /// or update operation is performed on the entity.
+  ///
+  /// @return an [AuditorAware] providing the current authenticated user's name, or empty if unauthenticated
   @Bean
   AuditorAware<String> auditorAware() {
     return () -> Optional
