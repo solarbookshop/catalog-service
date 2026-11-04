@@ -1,5 +1,12 @@
 # Catalog Service
 
+[![Commit Stage](https://github.com/solarbookshop/catalog-service/actions/workflows/commit-stage.yml/badge.svg)](https://github.com/solarbookshop/catalog-service/actions/workflows/commit-stage.yml)
+[![Acceptance Stage](https://github.com/solarbookshop/catalog-service/actions/workflows/acceptance-stage.yml/badge.svg)](https://github.com/solarbookshop/catalog-service/actions/workflows/acceptance-stage.yml)
+[![Java](https://img.shields.io/badge/Java-25-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/25/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1.0-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-2025.1.2-6DB33F?logo=spring&logoColor=white)](https://spring.io/projects/spring-cloud)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+
 This application is part of the Solar Bookshop system and provides the functionality for managing the books in the
 bookshop catalog.
 
@@ -74,7 +81,7 @@ Access PostgreSQL from the host machine:
 PGPASSWORD=secret psql -h localhost -p 5433 -U user -d solardb_catalog
 ```
 
-| PSQL Command	               | Description                                    |
+| PSQL Command               | Description                                    |
 |:---------------------------|:-----------------------------------------------|
 | `\list`                    | List all databases.                            |
 | `\connect solardb_catalog` | Connect to specific database.                  |
